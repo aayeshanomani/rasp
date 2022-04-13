@@ -8,8 +8,31 @@ if(isset($_POST['submit']))
 $name=$_POST['fullname'];
 $email=$_POST['emailid'];
 $contactno=$_POST['contactno'];
+$role=$_POST['role'];
 $password=md5($_POST['password']);
-$query=mysqli_query($con,"insert into users(name,email,contactno,password) values('$name','$email','$contactno','$password')");
+$role_id = 0;
+//echo "<script>alert('$role');</script>";
+if(strcmp($role,'All')==0)
+{
+	$role_id = 2;
+}
+else if(strcmp($role,'Books')==0)
+{
+	$role_id = 5;
+}
+else if(strcmp($role,'Furniture')==0)
+{
+	$role_id = 6;
+}
+else if(strcmp($role,'Electronics')==0)
+{
+	$role_id = 7;
+}
+else if(strcmp($role,'Fashion')==0)
+{
+	$role_id = 8;
+}
+$query=mysqli_query($con,"insert into users(name,email,contactno,password, role_id) values('$name','$email','$contactno','$password', '$role_id')");
 if($query)
 {
 	echo "<script>alert('You are successfully register');</script>";
@@ -218,6 +241,22 @@ echo htmlentities($_SESSION['errmsg']="");
 <div class="form-group">
 	    	<label class="info-title" for="contactno">Contact No. <span>*</span></label>
 	    	<input type="text" class="form-control unicase-form-control text-input" id="contactno" name="contactno" maxlength="10" required >
+	  	</div>
+
+		  <div class="form-group">
+	    	<label class="info-title" for="role">User Type (Interested in)<span>*</span></label>
+	    	<div id="role">
+				<input type="radio" id="all" name="role" value="All">
+				<label for="all">All</label><br>
+				<input type="radio" id="books" name="role" value="Books">
+				<label for="books">Books</label><br>
+				<input type="radio" id="electronics" name="role" value="Electronics">
+				<label for="electronics">Electronics</label><br>
+				<input type="radio" id="fashion" name="role" value="Fashion">
+				<label for="fashion">Fashion</label><br>
+				<input type="radio" id="furniture" name="role" value="Furniture">
+				<label for="furniture">Furniture</label><br>
+			</div>
 	  	</div>
 
 <div class="form-group">
