@@ -83,7 +83,8 @@ while($row=mysqli_fetch_array($query))
 											<td><?php echo htmlentities($row['postingDate']);?></td>
 											<td>
 											<a href="edit-products.php?id=<?php echo $row['id']?>" ><i class="icon-edit"></i></a>
-											<a href="manage-products.php?id=<?php echo $row['id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')"><i class="icon-remove-sign"></i></a></td>
+											<a href="delete-products.php?id=<?php echo $row['id']?>" onClick="deleteProduct()"><i class="icon-remove-sign"></i></a></td>
+										
 										</tr>
 										<?php $cnt=$cnt+1; } ?>
 										
@@ -114,6 +115,18 @@ while($row=mysqli_fetch_array($query))
 			$('.dataTables_paginate > a:first-child').append('<i class="icon-chevron-left shaded"></i>');
 			$('.dataTables_paginate > a:last-child').append('<i class="icon-chevron-right shaded"></i>');
 		} );
+		function deleteProduct()
+		{
+			<?php
+			$query=mysqli_query($con,"SELECT role_id FROM admin WHERE id='".$_SESSION['id']."'");
+			$role_id=mysqli_fetch_array($query)[0];
+			if($role_id!=1 && $role_id!=4)
+				header('location:access-denied.php');
+			else
+				$rowid = $row['id'];
+				header("location:manage-products.php?id=${rowid}&del=delete");
+			?>
+		}
 	</script>
 </body>
 <?php } ?>

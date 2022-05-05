@@ -23,6 +23,7 @@ else
 $_SESSION['errmsg']="Invalid username or password";
 $extra="index.php";
 $host  = $_SERVER['HTTP_HOST'];
+$_SESSION['id']=$num['id'];
 $uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
 header("location:http://$host$uri/$extra");
 exit();

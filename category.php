@@ -5,8 +5,7 @@ include('includes/config.php');
 $cid=intval($_GET['cid']);
 if(strlen($_SESSION['login'])==0)
 {   
-	echo "<script>alert('Permission denied.')</script>";
-	echo "<script type='text/javascript'> document.location ='my-cart.php'; </script>";
+	header('location:access-denied.php');
 }
 $query=mysqli_query($con,"SELECT role_id FROM users WHERE id='".$_SESSION['id']."'");
 $role_id=mysqli_fetch_array($query)[0];
@@ -16,29 +15,25 @@ if($role_id!=2){
 		case 3:
 			if($role_id!=5)
 			{
-				echo "<script>alert('Permission denied.')</script>";
-				echo "<script type='text/javascript'> document.location ='my-cart.php'; </script>";
+				header('location:access-denied.php');
 			}
 			break;
 		case 4:
 			if($role_id!=7)
 			{
-				echo "<script>alert('Permission denied.')</script>";
-				echo "<script type='text/javascript'> document.location ='my-cart.php'; </script>";
+				header('location:access-denied.php');
 			}
 			break;
 		case 5:
 			if($role_id!=6)
 			{
-				echo "<script>alert('Permission denied.')</script>";
-				echo "<script type='text/javascript'> document.location ='my-cart.php'; </script>";
+				header('location:access-denied.php');
 			}
 			break;
 		case 6:
 			if($role_id!=8)
 			{
-				echo "<script>alert('Permission denied.')</script>";
-				echo "<script type='text/javascript'> document.location ='my-cart.php'; </script>";
+				header('location:access-denied.php');
 			}
 			break;
 	}

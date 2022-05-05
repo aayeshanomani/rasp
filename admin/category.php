@@ -2,11 +2,18 @@
 <?php
 session_start();
 include('include/config.php');
+echo $_SESSION['id'];
 if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
 }
 else{
+	$cid=intval($_GET['cid']);
+$query=mysqli_query($con,"SELECT role_id FROM admin WHERE id='".$_SESSION['id']."'");
+$role_id=mysqli_fetch_array($query)[0];
+if($role_id!=1)
+	header('location:access-denied.php');
+
 date_default_timezone_set('Asia/Kolkata');// change according timezone
 $currentTime = date( 'd-m-Y h:i:s A', time () );
 

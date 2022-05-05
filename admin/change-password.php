@@ -2,6 +2,7 @@
 <?php
 session_start();
 include('include/config.php');
+echo $_SESSION['id'];
 if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');

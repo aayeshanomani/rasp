@@ -7,6 +7,10 @@ if(strlen($_SESSION['alogin'])==0)
 header('location:index.php');
 }
 else{
+	$query=mysqli_query($con,"SELECT role_id FROM admin WHERE id='".$_SESSION['id']."'");
+$role_id=mysqli_fetch_array($query)[0];
+if($role_id!=1 && $role_id!=3)
+	header('location:access-denied.php');
 	$pid=intval($_GET['id']);// product id
 if(isset($_POST['submit']))
 {
